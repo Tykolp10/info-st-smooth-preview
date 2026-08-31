@@ -129,7 +129,10 @@ function goToSlide(idx) {
   if (!slides.length) return;
   prepareHeroSlide(slides[(idx + slides.length) % slides.length]);
   slides[currentSlide].classList.remove('active');
-  if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
+  if (dots[currentSlide]) {
+    dots[currentSlide].classList.remove('active');
+    dots[currentSlide].setAttribute('aria-pressed', 'false');
+  }
   currentSlide = (idx + slides.length) % slides.length;
   slides[currentSlide].classList.add('active');
   const activeDot = dots[currentSlide];
@@ -137,6 +140,7 @@ function goToSlide(idx) {
     activeDot.classList.remove('active');
     void activeDot.offsetWidth;
     activeDot.classList.add('active');
+    activeDot.setAttribute('aria-pressed', 'true');
   }
 }
 
@@ -214,6 +218,16 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const target = document.querySelector(href);
     if (target) {
       e.preventDefault();
+      if (target.matches('#products-grid .product-card--secondary')) {
+        setProductsExpanded(true);
+        if (productsMore) productsMore.hidden = false;
+        productCards.forEach(card => card.classList.remove('is-hidden'));
+        filterChips.forEach(chip => {
+          const isAll = chip.dataset.filter === 'all';
+          chip.classList.toggle('is-active', isAll);
+          chip.setAttribute('aria-pressed', isAll ? 'true' : 'false');
+        });
+      }
       target.scrollIntoView({ behavior: prefersReducedMotion.matches ? 'auto' : 'smooth' });
     }
   });
@@ -301,13 +315,38 @@ updateScrollUI();
 // ===== PRODUCT FILTER =====
 const filterChips = document.querySelectorAll('.filter-chip');
 const productCards = document.querySelectorAll('#products-grid .product-card');
+const productsGrid = document.getElementById('products-grid');
+const productsMore = document.getElementById('products-more');
+
+function setProductsExpanded(expanded) {
+  if (!productsGrid || !productsMore) return;
+  productsGrid.classList.toggle('is-expanded', expanded);
+  productsMore.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  productsMore.innerHTML = expanded
+    ? 'Sembunyikan produk <span aria-hidden="true">↑</span>'
+    : 'Lihat semua produk <span aria-hidden="true">↓</span>';
+}
+
+if (productsMore) {
+  productsMore.addEventListener('click', () => {
+    const expanded = productsMore.getAttribute('aria-expanded') === 'true';
+    setProductsExpanded(!expanded);
+  });
+}
+
 filterChips.forEach(chip => {
   chip.addEventListener('click', () => {
     const filter = chip.dataset.filter;
     filterChips.forEach(c => {
       c.classList.toggle('is-active', c === chip);
-      c.setAttribute('aria-selected', c === chip ? 'true' : 'false');
+      c.setAttribute('aria-pressed', c === chip ? 'true' : 'false');
     });
+    if (filter !== 'all' && productsMore) {
+      setProductsExpanded(true);
+      productsMore.hidden = true;
+    } else if (productsMore) {
+      productsMore.hidden = false;
+    }
     productCards.forEach(card => {
       const match = filter === 'all' || card.dataset.category === filter;
       card.classList.toggle('is-hidden', !match);
@@ -382,18 +421,17 @@ if (typeof ST_CONFIG !== 'undefined') {
 
   // Sticky Mobile CTA
   const stickyCtaMobile = document.getElementById('sticky-cta-mobile');
-  const stickyBtn = document.getElementById('sticky-btn');
-  if (stickyCtaMobile && stickyBtn) {
-    stickyBtn.addEventListener('click', () => {
-      openLocator('sticky-mobile', 'persistent-cta');
-    });
-
+  if (stickyCtaMobile) {
+    const setStickyVisible = visible => {
+      stickyCtaMobile.classList.toggle('is-visible', visible);
+      document.body.classList.toggle('has-sticky-cta', visible);
+    };
     // Hide when hero is in view
     const heroObserver = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
-        stickyCtaMobile.classList.remove('is-visible');
+        setStickyVisible(false);
       } else {
-        stickyCtaMobile.classList.add('is-visible');
+        setStickyVisible(true);
       }
     }, { rootMargin: '-10% 0px 0px 0px', threshold: 0 });
     if (heroSection) heroObserver.observe(heroSection);

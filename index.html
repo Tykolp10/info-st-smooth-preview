@@ -63,6 +63,7 @@
           <a href="#csr" class="nav-link">CSR</a>
           <a href="#cerita" class="nav-link">Cerita ST</a>
           <a href="#kontak" class="nav-link">Kontak</a>
+          <a href="https://info-st.com/location" target="_blank" rel="noopener" class="nav-link nav-link--cta cta-store-locator" data-cta-type="nav" data-product="general">Cari Outlet</a>
         </nav>
         <button class="navbar__hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -115,9 +116,9 @@
         </div>
       </div>
       <div class="hero__dots" id="hero-dots">
-        <span class="hero__dot active" data-idx="0"></span>
-        <span class="hero__dot" data-idx="1"></span>
-        <span class="hero__dot" data-idx="2"></span>
+        <button class="hero__dot active" type="button" data-idx="0" aria-label="Tampilkan slide 1" aria-pressed="true"></button>
+        <button class="hero__dot" type="button" data-idx="1" aria-label="Tampilkan slide 2" aria-pressed="false"></button>
+        <button class="hero__dot" type="button" data-idx="2" aria-label="Tampilkan slide 3" aria-pressed="false"></button>
       </div>
       <div class="hero__scroll-hint">
         <span>Scroll</span>
@@ -219,147 +220,158 @@
           <p class="section-desc">Diracik dari tembakau pilihan, cengkih, jinten, dan rempah-rempah Nusantara — setiap varian ST adalah karya yang lahir dari hati, untuk Indonesia Raya.</p>
           <p class="section-note">Harga bervariasi per wilayah · <a href="https://info-st.com/location" target="_blank" rel="noopener">Cari toko terdekat →</a></p>
         </div>
-        <div class="products__filter" id="products-filter" role="tablist" aria-label="Filter kategori produk">
-          <button class="filter-chip is-active" data-filter="all" role="tab" aria-selected="true">Semua</button>
-          <button class="filter-chip" data-filter="premium" role="tab">Premium</button>
-          <button class="filter-chip" data-filter="seimbang" role="tab">Seimbang</button>
-          <button class="filter-chip" data-filter="bold" role="tab">Bold</button>
-          <button class="filter-chip" data-filter="electron" role="tab">Electron</button>
-          <button class="filter-chip" data-filter="slim" role="tab">Slim</button>
-          <button class="filter-chip" data-filter="putih" role="tab">Putih</button>
+        <div class="products__filter" id="products-filter" role="group" aria-label="Filter kategori produk">
+          <button class="filter-chip is-active" data-filter="all" type="button" aria-pressed="true">Semua</button>
+          <button class="filter-chip" data-filter="premium" type="button" aria-pressed="false">Premium</button>
+          <button class="filter-chip" data-filter="seimbang" type="button" aria-pressed="false">Seimbang</button>
+          <button class="filter-chip" data-filter="bold" type="button" aria-pressed="false">Bold</button>
+          <button class="filter-chip" data-filter="electron" type="button" aria-pressed="false">Electron</button>
+          <button class="filter-chip" data-filter="slim" type="button" aria-pressed="false">Slim</button>
+          <button class="filter-chip" data-filter="putih" type="button" aria-pressed="false">Putih</button>
         </div>
-        <div class="products__grid" id="products-grid">
-          <div class="product-card reveal-up" data-delay="0" data-category="bold">
+        <div class="products__grid" id="products-grid" aria-live="polite">
+          <div class="product-card product-card--featured reveal-up" data-delay="0" data-category="bold" id="product-matursuwon">
             <div class="product-card__img-wrap">
               <img src="assets/images/optimized/product-matursuwun.jpg" width="1200" height="720" alt="Matur Suwon SM" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('product-card__img--fallback')" />
               <div class="product-card__overlay"><a href="https://info-st.com/location" target="_blank" rel="noopener" class="btn btn--gold btn--sm">Cari Toko</a></div>
             </div>
             <div class="product-card__info">
               <h3 class="product-card__name">Matur Suwon SM</h3>
-              <p class="product-card__desc">Formulasi Spesial Mix dari tembakau dan rempah-rempah pilihan Nusantara. Rasa gurih, tebal, dan tetap halus. Nama berarti "Terima Kasih" — wujud syukur ST untuk Rakyat Indonesia.</p>
+              <p class="product-card__desc">Formulasi spesial mix dengan karakter rasa gurih dan tebal, dipadukan rempah Nusantara. Nama berarti "Terima Kasih" — wujud syukur ST untuk Rakyat Indonesia.</p>
               <div class="product-card__footer">
                 <span class="product-card__tag">SKT · Bold</span>
+                <a href="https://info-st.com/location" target="_blank" rel="noopener" class="product-card__action cta-store-locator" data-cta-type="product-card" data-product="matur-suwon">Cari Outlet <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
-          <div class="product-card reveal-up" data-delay="50" data-category="bold">
+          <div class="product-card product-card--featured reveal-up" data-delay="50" data-category="bold" id="product-raos-ngeten-puron">
             <div class="product-card__img-wrap">
               <img src="assets/images/optimized/product-raos-ngeten-puron.jpg" width="1200" height="720" alt="Raos Ngeten Puron" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('product-card__img--fallback')" />
               <div class="product-card__overlay"><a href="https://info-st.com/location" target="_blank" rel="noopener" class="btn btn--gold btn--sm">Cari Toko</a></div>
             </div>
             <div class="product-card__info">
               <h3 class="product-card__name">Raos Ngeten Puron</h3>
-              <p class="product-card__desc">Kretek dengan rasa paling tebal dan kuat dari seluruh varian ST. Tembakau diformulasikan dengan rempah-rempah antioksidan pilihan — kekuatan rasa khas Nusantara dalam setiap hisapan.</p>
+              <p class="product-card__desc">Karakter rasa paling tebal dan kuat di antara varian ST, dengan racikan rempah Nusantara yang khas.</p>
               <div class="product-card__footer">
                 <span class="product-card__tag">SKT · Bold</span>
+                <a href="https://info-st.com/location" target="_blank" rel="noopener" class="product-card__action cta-store-locator" data-cta-type="product-card" data-product="raos-ngeten-puron">Cari Outlet <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
-          <div class="product-card reveal-up" data-delay="100" data-category="seimbang">
+          <div class="product-card product-card--featured reveal-up" data-delay="100" data-category="seimbang" id="product-raos-ngeten-mawon">
             <div class="product-card__img-wrap">
               <img src="assets/images/optimized/product-raos-ngeten-mawon.jpg" width="1200" height="720" alt="Raos Ngeten Mawon" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('product-card__img--fallback')" />
               <div class="product-card__overlay"><a href="https://info-st.com/location" target="_blank" rel="noopener" class="btn btn--gold btn--sm">Cari Toko</a></div>
             </div>
             <div class="product-card__info">
               <h3 class="product-card__name">Raos Ngeten Mawon</h3>
-              <p class="product-card__desc">Rasa seimbang antara kuat dan halus. Tembakau medium dengan campuran rempah mirip varian premium — pintu masuk menuju cita rasa premium ST dengan harga lebih terjangkau.</p>
+              <p class="product-card__desc">Rasa seimbang antara kuat dan halus dengan karakter medium, cocok untuk mengenal cita rasa ST.</p>
               <div class="product-card__footer">
                 <span class="product-card__tag">SKT · Seimbang</span>
+                <a href="https://info-st.com/location" target="_blank" rel="noopener" class="product-card__action cta-store-locator" data-cta-type="product-card" data-product="raos-ngeten-mawon">Cari Outlet <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
-          <div class="product-card reveal-up" data-delay="150" data-category="seimbang">
+          <div class="product-card product-card--secondary reveal-up" data-delay="150" data-category="seimbang" id="product-merah-putih">
             <div class="product-card__img-wrap">
               <img src="assets/images/optimized/product-merahputih.jpg" width="1200" height="720" alt="Merah Putih" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('product-card__img--fallback')" />
               <div class="product-card__overlay"><a href="https://info-st.com/location" target="_blank" rel="noopener" class="btn btn--gold btn--sm">Cari Toko</a></div>
             </div>
             <div class="product-card__info">
               <h3 class="product-card__name">Merah Putih</h3>
-              <p class="product-card__desc">Persembahan untuk mensyukuri kemerdekaan dan berdirinya NKRI. Rasa halus dan gurih, formulasi rempah-rempah antibakteri. Kini hadir dengan kemasan baru dan cita rasa lebih stabil.</p>
+              <p class="product-card__desc">Persembahan untuk mensyukuri kemerdekaan dan berdirinya NKRI, dengan karakter rasa halus dan gurih.</p>
               <div class="product-card__footer">
                 <span class="product-card__tag">SKT · Seimbang</span>
+                <a href="https://info-st.com/location" target="_blank" rel="noopener" class="product-card__action cta-store-locator" data-cta-type="product-card" data-product="merah-putih">Cari Outlet <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
-          <div class="product-card reveal-up" data-delay="200" data-category="electron">
+          <div class="product-card product-card--secondary reveal-up" data-delay="200" data-category="electron" id="product-blokosutho">
             <div class="product-card__img-wrap">
               <img src="assets/images/optimized/product-blokosutho.jpg" width="1200" height="720" alt="Alastu Blokosutho" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('product-card__img--fallback')" />
               <div class="product-card__overlay"><a href="https://info-st.com/location" target="_blank" rel="noopener" class="btn btn--gold btn--sm">Cari Toko</a></div>
             </div>
             <div class="product-card__info">
               <h3 class="product-card__name">Alastu Blokosutho</h3>
-              <p class="product-card__desc">"Terus terang, apa adanya." Tembakau kualitas tinggi dengan formulasi rempah khusus mengandung antibodi — meningkatkan daya tahan tubuh dan memerangi bakteri serta virus penyebab penyakit.</p>
+              <p class="product-card__desc">"Terus terang, apa adanya." Tembakau kualitas tinggi dengan formulasi rempah khusus dan karakter rasa yang tegas.</p>
               <div class="product-card__footer">
                 <span class="product-card__tag">SKT · Electron</span>
+                <a href="https://info-st.com/location" target="_blank" rel="noopener" class="product-card__action cta-store-locator" data-cta-type="product-card" data-product="blokosutho">Cari Outlet <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
-          <div class="product-card reveal-up" data-delay="250" data-category="slim">
+          <div class="product-card product-card--secondary reveal-up" data-delay="250" data-category="slim" id="product-getszemani">
             <div class="product-card__img-wrap">
               <img src="assets/images/optimized/product-getzemani.jpg" width="1200" height="720" alt="Getszemani" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('product-card__img--fallback')" />
               <div class="product-card__overlay"><a href="https://info-st.com/location" target="_blank" rel="noopener" class="btn btn--gold btn--sm">Cari Toko</a></div>
             </div>
             <div class="product-card__info">
               <h3 class="product-card__name">Getszemani</h3>
-              <p class="product-card__desc">Satu-satunya kretek ST bersiluet ramping (slim). Halus, ringan, namun tetap autentik. Terinspirasi dari Taman Gethsemane di kaki Bukit Zaitun. Diformulasikan dengan rempah kaya manfaat.</p>
+              <p class="product-card__desc">Kretek ST bersiluet ramping (slim). Halus, ringan, dan tetap autentik, terinspirasi dari Taman Gethsemane.</p>
               <div class="product-card__footer">
                 <span class="product-card__tag">SKT · Slim</span>
+                <a href="https://info-st.com/location" target="_blank" rel="noopener" class="product-card__action cta-store-locator" data-cta-type="product-card" data-product="gets-zemani">Cari Outlet <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
-          <div class="product-card reveal-up" data-delay="300" data-category="premium">
+          <div class="product-card product-card--secondary reveal-up" data-delay="300" data-category="premium" id="product-raos-paling-eco">
             <div class="product-card__img-wrap">
               <img src="assets/images/optimized/product-raos-paling-eco.jpg" width="1200" height="720" alt="Raos Paling Eco" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('product-card__img--fallback')" />
               <div class="product-card__overlay"><a href="https://info-st.com/location" target="_blank" rel="noopener" class="btn btn--gold btn--sm">Cari Toko</a></div>
             </div>
             <div class="product-card__info">
               <h3 class="product-card__name">Raos Paling Eco</h3>
-              <p class="product-card__desc">"Rasa Paling Enak." Perpaduan tembakau, cengkeh, rempah-rempah, dan madu murni berkualitas tinggi. Nikmat, sedap, manis, halus, dan harum — ekspresi cita rasa puncak kretek Indonesia.</p>
+              <p class="product-card__desc">"Rasa Paling Enak." Perpaduan tembakau, cengkeh, rempah-rempah, dan madu murni dengan karakter manis, halus, dan harum.</p>
               <div class="product-card__footer">
                 <span class="product-card__tag">SKT · Premium</span>
+                <a href="https://info-st.com/location" target="_blank" rel="noopener" class="product-card__action cta-store-locator" data-cta-type="product-card" data-product="raos-paling-eco">Cari Outlet <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
-          <div class="product-card reveal-up" data-delay="350" data-category="putih">
+          <div class="product-card product-card--secondary reveal-up" data-delay="350" data-category="putih" id="product-cafetin">
             <div class="product-card__img-wrap">
               <img src="assets/images/optimized/product-cafetin.jpg" width="1200" height="720" alt="Alastu Caffetin" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('product-card__img--fallback')" />
               <div class="product-card__overlay"><a href="https://info-st.com/location" target="_blank" rel="noopener" class="btn btn--gold btn--sm">Cari Toko</a></div>
             </div>
             <div class="product-card__info">
               <h3 class="product-card__name">Alastu Caffetin</h3>
-              <p class="product-card__desc">Kretek putih tanpa filter. Singkatan dari Caffeine dan Nicotine. Formulasi rempah berkualitas tinggi menghasilkan rasa ringan saat dihisap, namun tetap gurih dan nikmat.</p>
+              <p class="product-card__desc">Kretek putih tanpa filter dengan racikan rempah berkualitas dan karakter rasa ringan, gurih, serta nikmat.</p>
               <div class="product-card__footer">
                 <span class="product-card__tag">SKT Putih · Caffeine</span>
+                <a href="https://info-st.com/location" target="_blank" rel="noopener" class="product-card__action cta-store-locator" data-cta-type="product-card" data-product="alastu-caffetin">Cari Outlet <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
-          <div class="product-card reveal-up" data-delay="400" data-category="premium">
+          <div class="product-card product-card--secondary reveal-up" data-delay="400" data-category="premium" id="product-rpe-spesial-oxy">
             <div class="product-card__img-wrap">
               <img src="assets/images/optimized/product-rpe-spesial-oxy.jpg" width="1200" height="720" alt="Raos Paling Eco Spesial Oxy" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('product-card__img--fallback')" />
               <div class="product-card__overlay"><a href="https://info-st.com/location" target="_blank" rel="noopener" class="btn btn--gold btn--sm">Cari Toko</a></div>
             </div>
             <div class="product-card__info">
               <h3 class="product-card__name">RPE Spesial Oxy</h3>
-              <p class="product-card__desc">Varian unggulan Raos Paling Eco dengan teknologi Oxytron — boost oxygen menghadirkan hentakan rasa lebih tajam, hisapan tetap smooth dan cool. Puncak inovasi tradisi kretek Indonesia.</p>
+              <p class="product-card__desc">Varian unggulan Raos Paling Eco dengan teknologi Oxytron untuk hentakan rasa lebih tajam dan sensasi hisap yang tetap smooth.</p>
               <div class="product-card__footer">
                 <span class="product-card__tag">SKT · Oxytron</span>
+                <a href="https://info-st.com/location" target="_blank" rel="noopener" class="product-card__action cta-store-locator" data-cta-type="product-card" data-product="rpe-spesial-oxy">Cari Outlet <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
-          <div class="product-card reveal-up" data-delay="450" data-category="premium">
+          <div class="product-card product-card--secondary reveal-up" data-delay="450" data-category="premium" id="product-syifaa">
             <div class="product-card__img-wrap">
               <img src="assets/images/optimized/product-syifa.jpg" width="1200" height="720" alt="Syifaa" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('product-card__img--fallback')" />
               <div class="product-card__overlay"><a href="https://info-st.com/location" target="_blank" rel="noopener" class="btn btn--gold btn--sm">Cari Toko</a></div>
             </div>
             <div class="product-card__info">
               <h3 class="product-card__name">Syifaa</h3>
-              <p class="product-card__desc">"Obat" dalam bahasa Arab. Varian paling premium — tembakau kualitas tertinggi, formulasi rempah paling intens, dilengkapi madu murni terbaik. Ukuran lebih panjang, khasiat lebih kaya.</p>
+              <p class="product-card__desc">"Obat" dalam bahasa Arab. Varian premium dengan tembakau kualitas tinggi, racikan rempah intens, dan sentuhan madu murni.</p>
               <div class="product-card__footer">
                 <span class="product-card__tag">SKT · Ultra Premium</span>
+                <a href="https://info-st.com/location" target="_blank" rel="noopener" class="product-card__action cta-store-locator" data-cta-type="product-card" data-product="syifaa">Cari Outlet <span aria-hidden="true">→</span></a>
               </div>
             </div>
           </div>
         </div>
+        <button class="products__more btn btn--outline" id="products-more" type="button" aria-expanded="false">Lihat semua produk <span aria-hidden="true">↓</span></button>
       </div>
     </section>
 
@@ -607,10 +619,10 @@
           <h2 class="section-title">Temukan ST <em>di Dekat Anda</em></h2>
           <p class="kontak__desc">Untuk informasi produk, distribusi, atau pertanyaan lainnya, silakan hubungi kami melalui kontak di bawah ini.</p>
           <ul class="kontak__list">
-            <li><span class="kontak__icon">📍</span><span>Jln Soekarno Hatta no. 22, Nglungge, Peterongan, Jombang — Jawa Timur, Indonesia Raya</span></li>
-            <li><span class="kontak__icon">📞</span><span><a href="tel:+6281335730002" style="color:inherit;text-decoration:none">+62 813-3573-0002</a></span></li>
-            <li><span class="kontak__icon">🌐</span><span><a href="https://info-st.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:none">info-st.com</a></span></li>
-            <li><span class="kontak__icon">🕐</span><span>Senin–Jumat, 08.00–17.00 WIB</span></li>
+            <li><span class="kontak__icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 21s7-7.2 7-12A7 7 0 0 0 5 9c0 4.8 7 12 7 12Z"/><circle cx="12" cy="9" r="2.25"/></svg></span><span>Jln Soekarno Hatta no. 22, Nglungge, Peterongan, Jombang — Jawa Timur, Indonesia Raya</span></li>
+            <li><span class="kontak__icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M5.7 3.8 8.4 3l2 4.8-1.9 1.4a15.6 15.6 0 0 0 6.3 6.3l1.4-1.9 4.8 2-.8 2.7a2 2 0 0 1-2.2 1.4C10.4 18.5 5.5 13.6 4.3 6a2 2 0 0 1 1.4-2.2Z"/></svg></span><span><a href="tel:+6281335730002" class="kontak__plain-link">+62 813-3573-0002</a></span></li>
+            <li><span class="kontak__icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span><span><a href="https://info-st.com/" target="_blank" rel="noopener" class="kontak__plain-link">info-st.com</a></span></li>
+            <li><span class="kontak__icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><span>Senin–Jumat, 08.00–17.00 WIB</span></li>
           </ul>
           <div class="kontak__socials">
             <a href="https://www.instagram.com/sehattentremcenter" target="_blank" rel="noopener" class="social-link" aria-label="Instagram ST">IG</a>
@@ -624,7 +636,7 @@
             <p class="form-intro">Pesan akan dikirim langsung ke WhatsApp resmi ST.</p>
             <div class="form-group">
               <label for="kategori">Kategori Pesan</label>
-              <select id="kategori" name="kategori" required style="width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border); padding: 12px 16px; font-size: 0.95rem; color: var(--cream); border-radius: 6px; outline: none; transition: border-color 0.3s; font-family: inherit;">
+              <select id="kategori" name="kategori" required>
                 <option value="" disabled selected>Pilih Kategori...</option>
                 <option value="stok">Tanya Stok Produk</option>
                 <option value="agen">Tertarik Menjadi Agen / Mitra</option>
@@ -648,7 +660,7 @@
             <button type="submit" class="btn btn--gold btn--full">
               <span class="btn__icon" aria-hidden="true">💬</span> Kirim via WhatsApp
             </button>
-            <p class="form-note" id="form-note"></p>
+            <p class="form-note" id="form-note" aria-live="polite"></p>
           </form>
         </div>
       </div>
@@ -685,38 +697,55 @@
           <img src="assets/images/optimized/logo-st.png" width="512" height="512" alt="ST Sehat Tentrem" class="footer__logo-img" loading="lazy" decoding="async" />
           <p class="footer__tagline">Sehat Tentrem</p>
           <p class="footer__since">Est. 2017 · Jombang, Jawa Timur</p>
+          <div class="footer__actions">
+            <a href="https://info-st.com/location" target="_blank" rel="noopener" class="btn btn--gold footer__action cta-store-locator" data-cta-type="footer" data-product="general">Cari Outlet</a>
+            <a href="#kontak" class="btn btn--outline footer__action">Hubungi ST</a>
+          </div>
         </div>
-        <div class="footer__links">
-          <h4>Navigasi</h4>
-          <a href="#hero">Beranda</a>
-          <a href="#about">Tentang Kami</a>
-          <a href="#products">Produk</a>
-          <a href="#inspirasi">Inspirasi</a>
-          <a href="#cerita">Cerita ST</a>
-          <a href="#kontak">Kontak</a>
-        </div>
-        <div class="footer__links">
-          <h4>Produk</h4>
-          <a href="#products">Matur Suwon</a>
-          <a href="#products">Getszemani</a>
-          <a href="#products">Blokosutho</a>
-          <a href="#products">RNP &amp; RNM</a>
-          <a href="#products">Merah Putih</a>
-        </div>
-        <div class="footer__legal-col">
-          <h4>Legal</h4>
-          <a href="privacy.html">Kebijakan Privasi</a>
-          <a href="terms.html">Syarat &amp; Ketentuan</a>
-        </div>
+        <details class="footer__group footer__links">
+          <summary>Navigasi</summary>
+          <div class="footer__group-list">
+            <a href="#hero">Beranda</a>
+            <a href="#about">Tentang Kami</a>
+            <a href="#products">Produk</a>
+            <a href="#inspirasi">Inspirasi</a>
+            <a href="#cerita">Cerita ST</a>
+            <a href="#kontak">Kontak</a>
+          </div>
+        </details>
+        <details class="footer__group footer__links">
+          <summary>Produk</summary>
+          <div class="footer__group-list">
+            <a href="#product-matursuwon">Matur Suwon</a>
+            <a href="#product-getszemani">Getszemani</a>
+            <a href="#product-blokosutho">Blokosutho</a>
+            <a href="#product-raos-ngeten-puron">RNP &amp; RNM</a>
+            <a href="#product-merah-putih">Merah Putih</a>
+          </div>
+        </details>
+        <details class="footer__group footer__legal-col">
+          <summary>Legal</summary>
+          <div class="footer__group-list">
+            <a href="privacy.html">Kebijakan Privasi</a>
+            <a href="terms.html">Syarat &amp; Ketentuan</a>
+          </div>
+        </details>
       </div>
       <div class="footer__bottom container">
         <p class="footer__copy">© 2026 PT Sehat Tentrem Jaya Lestari. Hak Cipta Dilindungi.</p>
-        <p class="footer__warning">⚠️ MEROKOK MEMBUNUH. Iklan ini hanya untuk perokok dewasa usia 21 tahun ke atas.</p>
+        <p class="footer__warning"><span class="footer__warning-mark" aria-hidden="true">!</span> MEROKOK MEMBUNUH. Iklan ini hanya untuk perokok dewasa usia 21 tahun ke atas.</p>
       </div>
     </footer>
 
     <!-- BACK TO TOP -->
     <button id="back-to-top" class="back-to-top" aria-label="Kembali ke atas">↑</button>
+
+    <!-- PERSISTENT MOBILE CTA -->
+    <aside class="sticky-cta-mobile" id="sticky-cta-mobile" aria-label="Aksi cepat mobile">
+      <a href="https://info-st.com/location" target="_blank" rel="noopener" id="sticky-btn" class="btn btn--gold btn--full cta-store-locator" data-cta-type="sticky-mobile" data-product="general">
+        Cari Outlet Terdekat <span aria-hidden="true">→</span>
+      </a>
+    </aside>
 
     <!-- LIGHTWEIGHT TEMPORARY ASSISTANT PLACEHOLDER -->
     <!-- Mas Bloko AI sengaja tidak dimuat di prototype ini; gunakan bantuan cepat tanpa engine eksternal. -->
