@@ -130,7 +130,7 @@ a { text-decoration: none; color: inherit; }
 }
 .age-gate__actions { display: flex; gap: 16px; justify-content: center; margin-bottom: 28px; }
 .age-gate__warning {
-  font-size: 0.7rem; color: #666;
+  font-size: 0.7rem; color: var(--text-muted);
   letter-spacing: 0.05em; text-transform: uppercase;
   border-top: 1px solid var(--border); padding-top: 20px; margin-top: 8px;
 }

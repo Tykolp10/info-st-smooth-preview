@@ -82,9 +82,9 @@
       return;
     }
     const text = ['Pertanyaan melalui website ST', `Nama: ${name}`, email ? `Email: ${email}` : '', `Keperluan: ${category}`, '', message].filter((value, index) => value || index === 4).join('\n');
-    const url = new URL('https://wa.me/6281335730002');
-    url.searchParams.set('text', text);
-    draftLink.href = url.toString();
+    // URLSearchParams encodes spaces as "+"; wa.me only percent-decodes, so the draft
+    // would arrive as "Nama:+Budi". encodeURIComponent keeps them as %20.
+    draftLink.href = `https://wa.me/6281335730002?text=${encodeURIComponent(text)}`;
     draftLink.hidden = false;
     status.textContent = 'Draf siap. Buka WhatsApp untuk memeriksa dan mengirim pesan. Pesan belum terkirim.';
     draftLink.focus();

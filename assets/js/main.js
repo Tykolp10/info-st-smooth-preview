@@ -33,7 +33,14 @@ function playEpicHeroEntrance() {
   requestAnimationFrame(() => mainSite.classList.add('site-ready'));
 }
 
-if (sessionStorage.getItem('st-age-verified')) {
+// sessionStorage THROWS (not returns null) when storage is blocked — Safari private
+// mode, embedded webviews, cookies-off. At top level that would kill every script below.
+const ageStore = {
+  get() { try { return sessionStorage.getItem('st-age-verified'); } catch (e) { return null; } },
+  set() { try { sessionStorage.setItem('st-age-verified', '1'); } catch (e) { /* konfirmasi berlaku untuk halaman ini saja */ } }
+};
+
+if (ageStore.get()) {
   ageGate.style.display = 'none';
   mainSite.classList.remove('hidden');
   if (document.readyState === 'loading') {
@@ -43,8 +50,9 @@ if (sessionStorage.getItem('st-age-verified')) {
   }
 } else {
   ageYes.addEventListener('click', () => {
-    sessionStorage.setItem('st-age-verified', '1');
+    ageStore.set();
     ageGate.style.opacity = '0';
+    ageGate.style.pointerEvents = 'none';
     ageGate.style.transition = 'opacity 0.8s ease';
     setTimeout(() => { ageGate.style.display = 'none'; }, 800);
     mainSite.classList.remove('hidden');
@@ -57,12 +65,16 @@ if (sessionStorage.getItem('st-age-verified')) {
   });
   ageNo.addEventListener('click', () => {
     // Lebih lembut: tampilkan pesan terima kasih, jangan langsung redirect
-    document.querySelector('.age-gate__content').innerHTML =
+    const goodbye = document.querySelector('.age-gate__content');
+    goodbye.setAttribute('role', 'status');
+    goodbye.setAttribute('tabindex', '-1');
+    goodbye.innerHTML =
       '<p class="age-gate__tagline">Terima Kasih</p>' +
       '<h2 class="age-gate__title">Sampai Jumpa Lagi</h2>' +
       '<p class="age-gate__desc">Situs ini hanya untuk pengunjung dewasa berusia 21 tahun ke atas. ' +
       'Terima kasih atas kunjungan Anda.</p>' +
-      '<p class="age-gate__warning">Merokok membunuh. Iklan ini ditujukan untuk perokok dewasa.</p>';
+      '<p class="age-gate__warning">Merokok membunuh. Dilarang menjual dan memberi kepada orang di bawah usia 21 tahun dan perempuan hamil.</p>';
+    goodbye.focus();
   });
   // Auto-focus tombol "Ya" untuk keyboard nav
   setTimeout(() => ageYes && ageYes.focus(), 100);
@@ -465,6 +477,11 @@ document.querySelectorAll('.timeline__title').forEach(title => {
 
 
 // ===== DYNAMIC EVENTS LOADER (from events.json) =====
+const escapeHtml = value => String(value == null ? '' : value)
+  .replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+// Escaping alone does not stop `javascript:` in an href, so the scheme is allowlisted too.
+const safeHttpUrl = value => /^https?:\/\//i.test(String(value == null ? '' : value)) ? escapeHtml(value) : '#';
+
 function loadDynamicEvents() {
   const inspirasiGrid = document.getElementById('inspirasi-grid');
   if (!inspirasiGrid) return;
@@ -479,14 +496,14 @@ function loadDynamicEvents() {
       
       // Build HTML for the top 3 events
       const html = events.slice(0, 3).map((event, idx) => `
-        <a href="${event.link}" target="_blank" rel="noopener" class="insp-card reveal-up" style="text-decoration:none; color:inherit;" data-delay="${idx * 100}">
+        <a href="${safeHttpUrl(event.link)}" target="_blank" rel="noopener" class="insp-card reveal-up" style="text-decoration:none; color:inherit;" data-delay="${idx * 100}">
           <div class="insp-card__img">
-            <img src="${event.image}" width="900" height="900" alt="${event.title}" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('insp-card__img--fallback-${idx + 1}')" />
+            <img src="${escapeHtml(event.image)}" width="900" height="900" alt="${escapeHtml(event.title)}" loading="lazy" decoding="async" onerror="this.parentElement.classList.add('insp-card__img--fallback-${idx + 1}')" />
           </div>
           <div class="insp-card__body">
-            <span class="insp-card__cat">${event.category}</span>
-            <h3 class="insp-card__title">${event.title}</h3>
-            <p class="insp-card__text">${event.desc}</p>
+            <span class="insp-card__cat">${escapeHtml(event.category)}</span>
+            <h3 class="insp-card__title">${escapeHtml(event.title)}</h3>
+            <p class="insp-card__text">${escapeHtml(event.desc)}</p>
             <span class="insp-card__soon" style="color:var(--gold); border-color:var(--gold)">Lihat di Instagram →</span>
           </div>
         </a>
