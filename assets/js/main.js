@@ -61,6 +61,9 @@ if (ageStore.get()) {
       mainSite.style.transition = 'opacity 0.6s'; 
       mainSite.style.opacity = '1'; 
       playEpicHeroEntrance();
+      // Tinggi dokumen baru terukur setelah konten tampil; hitung ulang agar bantuan
+      // cepat tidak terlanjur muncul di puncak halaman.
+      updateScrollUI();
     }, 50);
   });
   ageNo.addEventListener('click', () => {
@@ -307,6 +310,10 @@ function updateScrollUI() {
   const scrollY = window.scrollY;
   if (navbar) navbar.classList.toggle('scrolled', scrollY > 60);
   if (backTop) backTop.classList.toggle('is-visible', scrollY > 600);
+  // Satu penanda untuk bagian akhir halaman; CSS yang memutuskan elemen mana yang
+  // tampil, sehingga bantuan cepat dan sticky CTA tidak pernah menumpuk.
+  const nearEnd = scrollY + window.innerHeight >= document.documentElement.scrollHeight - 320;
+  document.body.classList.toggle('at-page-end', nearEnd);
 
   let current = '';
   sections.forEach(s => {
@@ -372,29 +379,12 @@ if (backTop) {
   });
 }
 
-// ===== LIGHTWEIGHT TEMPORARY ASSISTANT =====
-// Mas Bloko AI/canvas/video sengaja tidak diinisialisasi di prototype ini.
-const quickHelp = document.getElementById('quick-help');
-const quickHelpToggle = document.getElementById('quick-help-toggle');
-const quickHelpPanel = document.getElementById('quick-help-panel');
-const quickHelpClose = document.getElementById('quick-help-close');
-
-if (quickHelp && quickHelpToggle && quickHelpPanel) {
-  const setQuickHelpOpen = open => {
-    quickHelpPanel.hidden = !open;
-    quickHelpToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  };
-
-  quickHelpToggle.addEventListener('click', () => {
-    setQuickHelpOpen(quickHelpPanel.hidden);
-  });
-  if (quickHelpClose) quickHelpClose.addEventListener('click', () => setQuickHelpOpen(false));
-  quickHelpPanel.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => setQuickHelpOpen(false));
-  });
-  document.addEventListener('keydown', e => {
-    if (e.key === 'Escape') setQuickHelpOpen(false);
-  });
+// ===== BANTUAN CEPAT =====
+// Panel lama diganti satu tautan ke WhatsApp CS. Kemunculannya diatur di
+// updateScrollUI() agar tidak menambah listener scroll baru.
+const quickHelpLink = document.getElementById('quick-help-link');
+if (quickHelpLink && typeof ST_CONFIG !== 'undefined') {
+  quickHelpLink.href = ST_CONFIG.buildWhatsappUrl('Halo ST, saya ingin menanyakan lokasi outlet terdekat.');
 }
 
 // ===== STORE LOCATOR PROTOTYPE LOGIC =====
