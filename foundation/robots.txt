@@ -1,0 +1,4 @@
+# Preview only. noindex metadata is present on every HTML page.
+# Crawling is allowed so search engines can read noindex.
+User-agent: *
+Allow: /
