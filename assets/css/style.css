@@ -1145,10 +1145,8 @@ body.at-page-end .sticky-cta-mobile { transform: translateY(100%); }
 
 @media (max-width: 768px) {
   .quick-help { right: 16px; bottom: 16px; }
-  /* Tombol duduk lebih rendah di mobile, jadi ruang yang perlu disisakan lebih kecil. */
-  .footer__warning { margin-bottom: 56px; }
   body.at-page-end.has-sticky-cta .quick-help { bottom: 16px; }
-  body.at-page-end.has-sticky-cta .back-to-top { bottom: 84px; }
+  body.at-page-end.has-sticky-cta .back-to-top { bottom: 76px; }
 }
 
 /* ===== INSPIRASI: COMING SOON BADGE ===== */
