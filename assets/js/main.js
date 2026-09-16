@@ -88,7 +88,9 @@ function showSplash() {
       splashFields.description.textContent = splashText(data, 'description');
       splashImage.src = data.image || splashImage.src;
       splashImage.alt = splashText(data, 'title');
-      splashLink.href = safeHttpUrl(data.link || '#');
+      splashLink.href = /^https?:\/\//i.test(String(data.link || '')) ? data.link : '#';
+      splashDismiss.textContent = document.documentElement.lang === 'en' ? 'Continue to Website' : 'Lanjut ke Website';
+      splashClose.setAttribute('aria-label', document.documentElement.lang === 'en' ? 'Close announcement' : 'Tutup informasi event');
       splashLink.textContent = splashText(data, 'cta') || (document.documentElement.lang === 'en' ? 'Learn More' : 'Lihat Selengkapnya');
       splashScreen.classList.remove('hidden');
       splashDismiss && splashDismiss.focus();
@@ -124,8 +126,7 @@ if (ageStore.get()) {
     ageGate.style.opacity = '0';
     ageGate.style.pointerEvents = 'none';
     ageGate.style.transition = 'opacity 0.8s ease';
-    setTimeout(() => { ageGate.style.display = 'none'; }, 800);
-    showSplash();
+    setTimeout(() => { ageGate.style.display = 'none'; showSplash(); }, 800);
   });
   ageNo.addEventListener('click', () => {
     // Lebih lembut: tampilkan pesan terima kasih, jangan langsung redirect

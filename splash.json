@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "eyebrow_id": "Event Terbaru",
+  "eyebrow_en": "Latest Event",
+  "title_id": "Informasi Terbaru Sehat Tentrem",
+  "title_en": "The Latest from Sehat Tentrem",
+  "description_id": "Lihat kegiatan dan informasi terbaru Sehat Tentrem.",
+  "description_en": "See the latest activities and news from Sehat Tentrem.",
+  "image": "assets/images/optimized/event-jazz-bandung.jpg",
+  "link": "https://www.instagram.com/sehattentremcenter/",
+  "cta_id": "Lihat Selengkapnya",
+  "cta_en": "Learn More"
+}
