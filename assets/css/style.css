@@ -580,7 +580,7 @@ a { text-decoration: none; color: inherit; }
 .product-card__info { padding: 20px; flex: 1; display: flex; flex-direction: column; }
 .product-card__name { font-family: 'Roboto', sans-serif; font-size: 1.1rem; font-weight: 700; color: #f0ead6; margin-bottom: 8px; }
 .product-card__desc { font-family: 'Roboto', sans-serif; font-size: 0.875rem; font-weight: 400; color: #9e8e6e; line-height: 1.7; margin-bottom: 14px; flex: 1; }
-.product-card__footer { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; }
+.product-card__footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; }
 .product-card__tag { font-family: 'Roboto', sans-serif; font-size: 0.65rem; font-weight: 300; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.5); padding: 3px 10px; border-radius: 20px; white-space: nowrap; }
 .product-card__action {
   display: inline-flex;
@@ -940,8 +940,9 @@ a { text-decoration: none; color: inherit; }
 }
 
 @media (min-width: 641px) {
+  /* Di layar lebar grup footer selalu terbuka (diatur lewat atribut open di
+     updateDeviceClasses), jadi summary bukan lagi tombol. */
   .footer__group > summary { pointer-events: none; }
-  .footer__group > .footer__group-list { display: flex !important; }
 }
 
 /* ===== ACTIVE NAV (class-based, override inline) ===== */
@@ -1069,6 +1070,13 @@ a { text-decoration: none; color: inherit; }
 }
 
 /* ===== BACK TO TOP ===== */
+.hero__cta { font-size: 1.1rem; padding: 18px 48px; box-shadow: 0 12px 30px rgba(200,169,110,0.4); }
+.hero__cta svg { flex: 0 0 auto; }
+
+/* "Untuk Indonesia Raya" turun ke barisnya sendiri di layar kecil; di layar lebar
+   tetap satu baris dengan pemisah titik. */
+.hero__eyebrow-tag::before { content: '\00b7'; margin-inline: 0.5em; }
+
 .back-to-top {
   position: fixed;
   right: 24px;
@@ -1097,6 +1105,8 @@ a { text-decoration: none; color: inherit; }
   visibility: visible;
   transform: translateY(0);
 }
+.back-to-top svg { transition: transform 0.3s ease; }
+.back-to-top.is-up svg { transform: rotate(180deg); }
 .back-to-top:hover {
   background: var(--gold-light);
   transform: translateY(-3px);
@@ -1366,6 +1376,8 @@ select#kategori option {
 
 /* ===== MOBILE TIMELINE ===== */
 @media (max-width: 640px) {
+  .hero__eyebrow-tag { display: block; }
+  .hero__eyebrow-tag::before { content: none; }
   .timeline::before { display: none; }
   .timeline__item { padding: 0 !important; flex-direction: column; }
   .timeline__dot { display: none; }
@@ -1445,14 +1457,16 @@ select#kategori option {
     width: 100%;
   }
   body.is-mobile .hero__cta {
-    font-size: 0.95rem !important;
-    padding: 12px 20px !important;
-    width: 100% !important;
-    max-width: 280px !important;
-    box-sizing: border-box !important;
-    display: inline-flex !important;
-    justify-content: center !important;
-    align-items: center !important;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    padding: 13px 18px;
+    width: auto;
+    max-width: 100%;
+    white-space: nowrap;
+    box-sizing: border-box;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
   }
   body.is-mobile .hero__slide-caption {
     bottom: 56px !important;

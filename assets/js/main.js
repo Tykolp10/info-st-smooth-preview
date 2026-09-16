@@ -1,4 +1,5 @@
 // ===== DEVICE DETECTOR & CLASS TOGGLER =====
+let footerWasWide = null;
 function updateDeviceClasses() {
   const width = window.innerWidth;
   const body = document.body;
@@ -12,6 +13,16 @@ function updateDeviceClasses() {
     body.classList.add('is-tablet');
   } else {
     body.classList.add('is-desktop');
+  }
+
+  // Di atas 640px grup footer bukan accordion lagi. Atribut open yang mengurusnya:
+  // memaksa anaknya tampil lewat CSS membuat isinya meluber ke luar <details> yang
+  // masih tertutup dan menghalangi klik di bawahnya. Hanya dijalankan saat melewati
+  // ambang, supaya grup yang sengaja dibuka pembaca di ponsel tidak ikut ditutup.
+  const wide = width > 640;
+  if (wide !== footerWasWide) {
+    footerWasWide = wide;
+    document.querySelectorAll('.footer__group').forEach(group => { group.open = wide; });
   }
 }
 window.addEventListener('resize', updateDeviceClasses);
@@ -309,16 +320,23 @@ if (form) {
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-link');
 const backTop = document.getElementById('back-to-top');
+let wasAtEnd = null;
 let scrollFrame = null;
 
 function updateScrollUI() {
   const scrollY = window.scrollY;
   if (navbar) navbar.classList.toggle('scrolled', scrollY > 60);
-  if (backTop) backTop.classList.toggle('is-visible', scrollY > 600);
   // Satu penanda untuk bagian akhir halaman; CSS yang memutuskan elemen mana yang
   // tampil, sehingga bantuan cepat dan sticky CTA tidak pernah menumpuk.
   const nearEnd = scrollY + window.innerHeight >= document.documentElement.scrollHeight - 320;
   document.body.classList.toggle('at-page-end', nearEnd);
+  if (backTop) {
+    backTop.classList.add('is-visible');
+    if (backTop.classList.toggle('is-up', nearEnd) !== wasAtEnd) {
+      wasAtEnd = nearEnd;
+      backTop.setAttribute('aria-label', nearEnd ? 'Kembali ke atas' : 'Lanjut ke bawah');
+    }
+  }
 
   let current = '';
   sections.forEach(s => {
@@ -380,7 +398,18 @@ filterChips.forEach(chip => {
 
 if (backTop) {
   backTop.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: prefersReducedMotion.matches ? 'auto' : 'smooth' });
+    const behavior = prefersReducedMotion.matches ? 'auto' : 'smooth';
+    if (backTop.classList.contains('is-up')) {
+      window.scrollTo({ top: 0, behavior });
+      return;
+    }
+    // Turun ke bagian berikutnya, bukan melompat sejauh satu layar — pembaca
+    // berhenti di awal bagian, bukan di tengah kalimat.
+    // Ambang 80px melewati bilah tetap di atas; tanpa itu bagian yang sedang
+    // dibaca ikut terpilih dan tombol hanya bergeser beberapa piksel.
+    const next = [...sections].find(section => section.getBoundingClientRect().top > 80);
+    if (next) next.scrollIntoView({ behavior });
+    else window.scrollTo({ top: document.documentElement.scrollHeight, behavior });
   });
 }
 
