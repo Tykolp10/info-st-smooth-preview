@@ -77,8 +77,30 @@
     'label[for="nama"]': { id: 'Nama Lengkap', en: 'Full Name' },
     'label[for="pesan"]': { id: 'Pesan', en: 'Message' },
     '.contact-form button[type="submit"]': { id: '<span class="btn__icon" aria-hidden="true">💬</span> Kirim via WhatsApp', en: '<span class="btn__icon" aria-hidden="true">💬</span> Open WhatsApp Draft' },
-    '.faq__question': { id: ['Apakah ST dijual di minimarket seperti Indomaret / Alfamart?','Bisa COD atau kirim ke seluruh Indonesia?','Bagaimana cara menjadi agen ST?'], en: ['Is ST sold in convenience stores such as Indomaret or Alfamart?','Can I pay on delivery or receive delivery across Indonesia?','How can I become an ST agent?'] }
+    '.faq__question': { id: ['Apakah ST dijual di minimarket seperti Indomaret / Alfamart?','Bisa COD atau kirim ke seluruh Indonesia?','Bagaimana cara menjadi agen ST?'], en: ['Is ST sold in convenience stores such as Indomaret or Alfamart?','Can I pay on delivery or receive delivery across Indonesia?','How can I become an ST agent?'] },
+    '#about .about__body': { en: [
+      'PT Sehat Tentrem Jaya Lestari was officially established in 2017, after being initiated in 2013 by M. Subchi Azal Tsani (Mas Bechi), son of Kiai Moch. Mukhtar Mu\'thi, Mursyid of Thoriqoh Shiddiqiyyah. Concerned about the economic conditions of the community, he began the business within the Majma\'al Bachroin Chubbul Wathon Minal Iman Shiddiqiyyah Islamic boarding school in Jombang.',
+      'More than a tobacco company, ST is a movement of faith, humanity, and care for the natural world. Every hand-rolled kretek expresses the spirit of “For a Greater Indonesia” and the pursuit of economic independence for communities in East Java.',
+      'ST has grown into a business ecosystem that includes Kopi Tombo, Susu Tombo ST, ST Beverage, Klambi ST, Mumtaaj Scarf, and Musik Sehat Tentrem (MST) — all moving with one shared spirit: a greater Indonesia.'
+    ] },
+    '#cerita .timeline__title': { en: ['The First Recipe Blends','PR Sehat Tentrem Jaya Lestari Is Established','The ST Group Ecosystem Is Born','Business Expansion','Today — A New Chapter of Growth'] },
+    '#cerita .timeline__desc': { en: [
+      'At the Shiddiqiyyah Islamic boarding school in Jombang, M. Subchi Azal Tsani, founder of Sehat Tentrem, began developing a kretek recipe with an Indonesian character. Four years of exploration followed: selecting tobacco, measuring cloves, and blending spices from Indonesia. One purpose guided the journey: For a Greater Indonesia.',
+      'After the recipe and formula became stable, ST was formally established as PR Sehat Tentrem Jaya Lestari in Kabuh, Jombang, East Java. This marked Sehat Tentrem’s expansion across Indonesia.',
+      'Over time, ST grew beyond kretek with Kopi Tombo ST, Susu Tombo ST, Klambi ST, and Musik Sehat Tentrem (MST), forming an integrated business ecosystem.',
+      'With hundreds of employees, agents in 34 provinces, and active CSR programs, PR Sehat Tentrem Jaya Lestari officially became PT Sehat Tentrem Jaya Lestari in 2022, marking a new phase of growth.',
+      'In 2026, ST enters a new chapter: strengthening distribution, collaborating with partners across the archipelago, and accelerating growth. From Jombang to the nation, the spirit of “For a Greater Indonesia” lives in every work.'
+    ] },
+    '#csr .csr-card__title': { en: ['A Decent Home of Gratitude','Community Support','A Foundation for Progress'] },
+    '#csr .csr-card__desc': { en: [
+      'Rumah Syukur Layak Huni Shiddiqiyyah is a free home-building program that helps eligible families live in safer, more suitable homes.',
+      'Food packages and financial support are distributed to orphans and people in need on national holidays or around the founder’s birthday.',
+      'Supporting economic independence by helping sustain faith and humanitarian work at the Shiddiqiyyah Islamic boarding school in Jombang.'
+    ] },
+    '.insp-card__text': { en: ['An intimate Jazz Night with ST ambassador Indro Hardjodikoro at Ruang Putih Bandung.','Sharing inspiration, stories, and the warmth of Ramadan with Sehat Tentrem in Mojokerto.','ST joined the thanksgiving gathering for Isra Mi’raj of Prophet Muhammad SAW and Shiddiqiyyah Day 1447 H.'] },
+    '.faq__answer p': { en: ['Not yet. We currently do not distribute through national convenience stores. We focus on empowering our agents and distribution partners across 34 provinces in Indonesia.','Yes. Many official agents deliver across the archipelago. Find the nearest agent through our Locator or contact the official WhatsApp number for assistance.','Use the contact form above, select “Become an agent / distribution partner,” and our team will contact you on WhatsApp with the requirements.'] }
   };
+  const originalHTML = new WeakMap();
   function safeGet() { try { return localStorage.getItem('st-main-lang') || 'id'; } catch (_) { return 'id'; } }
   function safeSet(v) { try { localStorage.setItem('st-main-lang', v); } catch (_) {} }
   function setLanguage(lang) {
@@ -94,7 +116,8 @@
     document.querySelectorAll('#main-nav .nav-link').forEach((el, i) => { if (nav[lang][i]) el.textContent = nav[lang][i]; });
     Object.entries(lists).forEach(([selector, values]) => {
       document.querySelectorAll(selector).forEach((el, i) => {
-        const value = Array.isArray(values[lang]) ? values[lang][i] : values[lang];
+        if (!originalHTML.has(el)) originalHTML.set(el, el.innerHTML);
+        const value = lang === 'id' ? originalHTML.get(el) : (Array.isArray(values[lang]) ? values[lang][i] : values[lang]);
         if (value) el.innerHTML = value;
       });
     });
