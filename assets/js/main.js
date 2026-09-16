@@ -92,11 +92,16 @@ const mainNav = document.getElementById('main-nav');
 const navBackdrop = document.getElementById('nav-backdrop');
 
 function setMenuOpen(open) {
+  const focusWasInside = mainNav.contains(document.activeElement);
   mainNav.classList.toggle('open', open);
   hamburger.classList.toggle('is-open', open);
   navBackdrop.classList.toggle('is-visible', open);
   hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
   document.body.style.overflow = open ? 'hidden' : '';
+  // Panel ada sebelum tombol di DOM: tanpa ini Tab pertama melompat ke konten di
+  // balik backdrop, dan saat ditutup fokus hilang ke <body>.
+  if (open) mainNav.querySelector('.nav-link').focus();
+  else if (focusWasInside) hamburger.focus();
 }
 
 hamburger.addEventListener('click', () => {
@@ -453,17 +458,6 @@ document.querySelectorAll('.faq__question').forEach(button => {
     }
   });
 });
-
-// ===== MOBILE TIMELINE ACCORDION =====
-document.querySelectorAll('.timeline__title').forEach(title => {
-  title.addEventListener('click', () => {
-    if (window.innerWidth <= 640) {
-      const item = title.closest('.timeline__item');
-      item.classList.toggle('is-open');
-    }
-  });
-});
-
 
 
 // ===== DYNAMIC EVENTS LOADER (from events.json) =====
