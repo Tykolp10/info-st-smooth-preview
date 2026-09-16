@@ -171,9 +171,11 @@
       '',
       message,
     ].filter((value, index) => value || index === 4);
+    // Nomor dibaca dari <meta> supaya hanya ada satu tempat untuk mengubahnya.
     // URLSearchParams mengubah spasi menjadi "+"; wa.me hanya melakukan
     // percent-decode, sehingga draf akan tiba sebagai "Nama:+Budi".
-    draftLink.href = `https://wa.me/6281335730002?text=${encodeURIComponent(lines.join('\n'))}`;
+    const number = (document.querySelector('meta[name="whatsapp-contact"]') || {}).content || '6281335730002';
+    draftLink.href = `https://wa.me/${number}?text=${encodeURIComponent(lines.join('\n'))}`;
     draftLink.hidden = false;
     status.textContent = t('form.ready');
     draftLink.focus();
