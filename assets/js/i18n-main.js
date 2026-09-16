@@ -119,7 +119,7 @@
   lists['.kontak__list li:nth-child(1) span:last-child'] = { en: 'Jln Soekarno Hatta No. 22, Nglungge, Peterongan, Jombang — East Java, Indonesia' };
   lists['.kontak__list li:nth-child(4) span:last-child'] = { en: 'Monday–Friday, 08:00–17:00 WIB' };
   lists['.form-optional'] = { en: '(optional)' };
-  lists['.footer__group-list a'] = { en: ['Home','About Us','Products','Inspiration','ST Story','Contact','Products','Matur Suwon','Getszemani','Blokosutho','RNP & RNM','Merah Putih','Privacy Policy','Terms & Conditions'] };
+  lists['.footer__group-list a'] = { en: ['Home','About Us','Products','Inspiration','ST Story','Contact','Matur Suwon','Getszemani','Blokosutho','RNP & RNM','Merah Putih','Privacy Policy','Terms & Conditions'] };
   lists['.footer__copy'] = { en: '© 2026 PT Sehat Tentrem Jaya Lestari. All Rights Reserved.' };
   lists['.footer__warning'] = { en: '<span class="footer__warning-mark" aria-hidden="true">!</span> SMOKING KILLS. DO NOT SELL OR GIVE TO ANYONE UNDER 21 OR TO PREGNANT WOMEN.' };
   lists['.product-card__desc'] = { en: [

@@ -80,6 +80,13 @@ a { text-decoration: none; color: inherit; }
 .age-gate__content > .language-toggle { position: absolute; top: 18px; right: 18px; }
 .language-toggle--nav { margin-left: 8px; padding: 6px 10px; }
 @media (max-width: 1023px) { .language-toggle--nav { margin: 10px 0 0; } }
+.legal-lang-toggle { margin-left: auto; }
+@media (min-width: 1024px) {
+  .legal-lang-toggle { margin: 0; }
+}
+@media (max-width: 1023px) {
+  .legal-lang-toggle { margin: 0; flex: 0 0 auto; }
+}
 
 /* ===== AGE GATE ===== */
 .age-gate {

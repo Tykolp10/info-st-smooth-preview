@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="assets/css/style.css" />
   <!-- Umami Analytics (Open Source) -->
 </head>
-<body>
+<body data-legal-page="privacy">
 
   <!-- SACRED HEADER BAR -->
   <div class="sacred-bar">
@@ -27,6 +27,7 @@
         <img src="assets/images/optimized/logo-st.png" width="512" height="512" alt="ST Sehat Tentrem Logo" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'" />
         <span class="navbar__logo-text" style="display:none">ST</span>
       </a>
+      <button class="language-toggle language-toggle--nav legal-lang-toggle" type="button" data-legal-lang-toggle aria-label="Switch to English">ID / EN</button>
     </div>
   </header>
 
@@ -99,6 +100,8 @@
       </div>
     </div>
   </main>
+
+  <script src="assets/js/legal-i18n.js"></script>
 
 </body>
 </html>
