@@ -52,6 +52,7 @@
   <div id="age-gate" class="age-gate" role="dialog" aria-modal="true" aria-label="Verifikasi usia 21 tahun ke atas">
     <div class="age-gate__bg"></div>
     <div class="age-gate__content">
+      <button class="language-toggle" type="button" data-main-lang-toggle aria-label="Switch to English">ID / EN</button>
       <div class="age-gate__logo">
         <img src="assets/images/optimized/logo-st.png" width="512" height="512" alt="ST Sehat Tentrem" class="age-gate__logo-img" fetchpriority="high" decoding="async" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" />
         <span class="age-gate__logo-fallback" style="display:none">ST</span>
@@ -87,6 +88,7 @@
           <a href="#cerita" class="nav-link">Cerita ST</a>
           <a href="#kontak" class="nav-link">Kontak</a>
           <a href="https://info-st.com/location" target="_blank" rel="noopener" class="nav-link nav-link--cta cta-store-locator" data-cta-type="nav" data-product="general">Cari Outlet</a>
+          <button class="language-toggle language-toggle--nav" type="button" data-main-lang-toggle aria-label="Switch to English">ID / EN</button>
         </nav>
         <button class="navbar__hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
           <span></span><span></span><span></span>
@@ -784,6 +786,7 @@
   </div><!-- /main-site -->
 
   <script src="assets/js/config.js"></script>
+  <script src="assets/js/i18n-main.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

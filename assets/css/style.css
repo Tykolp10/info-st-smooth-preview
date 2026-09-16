@@ -74,6 +74,11 @@ a { text-decoration: none; color: inherit; }
 .btn--outline:hover { border-color: var(--gold); color: var(--gold); }
 .btn--sm { padding: 10px 24px; font-size: 0.75rem; }
 .btn--full { width: 100%; text-align: center; }
+.language-toggle { border: 1px solid rgba(200,169,110,0.65); background: rgba(15,26,52,0.78); color: var(--gold-light); border-radius: 999px; padding: 8px 13px; font: inherit; font-size: 0.72rem; font-weight: 700; letter-spacing: .08em; cursor: pointer; transition: var(--trans); }
+.language-toggle:hover, .language-toggle:focus-visible { background: var(--gold); color: var(--dark); outline: none; }
+.age-gate__content > .language-toggle { position: absolute; top: 18px; right: 18px; }
+.language-toggle--nav { margin-left: 8px; padding: 6px 10px; }
+@media (max-width: 1023px) { .language-toggle--nav { margin: 10px 0 0; } }
 
 /* ===== AGE GATE ===== */
 .age-gate {

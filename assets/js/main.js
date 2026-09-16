@@ -363,9 +363,10 @@ function setProductsExpanded(expanded) {
   if (!productsGrid || !productsMore) return;
   productsGrid.classList.toggle('is-expanded', expanded);
   productsMore.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+  const english = document.documentElement.lang === 'en';
   productsMore.innerHTML = expanded
-    ? 'Sembunyikan produk <span aria-hidden="true">↑</span>'
-    : 'Lihat semua produk <span aria-hidden="true">↓</span>';
+    ? `${english ? 'Hide products' : 'Sembunyikan produk'} <span aria-hidden="true">↑</span>`
+    : `${english ? 'View all products' : 'Lihat semua produk'} <span aria-hidden="true">↓</span>`;
 }
 
 if (productsMore) {
