@@ -58,6 +58,10 @@
         'WhatsApp: <a href="https://wa.me/6281335730002" target="_blank" rel="noopener">+62 813-3573-0002</a>',
         'Website: <a href="https://info-st.com" target="_blank" rel="noopener">info-st.com</a>'
       ],
+      // The sanitized GitHub Pages preview removes the analytics/provider
+      // explanation paragraphs. Keep the remaining copy in the same semantic
+      // order instead of shifting every later paragraph under the wrong heading.
+      omittedParagraphs: [6, 12],
       footer: ['© 2026 PT Sehat Tentrem Jaya Lestari · For a Greater Indonesia', '⚠️ SMOKING KILLS. DO NOT SELL OR GIVE TO ANYONE UNDER 21 OR TO PREGNANT WOMEN.']
     },
     terms: {
@@ -105,7 +109,13 @@
     root.querySelector('.legal-page__back').innerHTML = useEnglish ? data.back : original.back;
     root.querySelector('.legal-page__title').innerHTML = useEnglish ? data.title : original.title;
     root.querySelector('.legal-page__updated').innerHTML = useEnglish ? data.updated : original.updated;
-    root.querySelectorAll(':scope > p:not(.legal-page__updated)').forEach((el, i) => { el.innerHTML = useEnglish ? data.paragraphs[i] : original.paragraphs[i]; });
+    const paragraphNodes = root.querySelectorAll(':scope > p:not(.legal-page__updated)');
+    const englishParagraphs = data.paragraphs.length === paragraphNodes.length
+      ? data.paragraphs
+      : data.paragraphs.filter((_, i) => !(data.omittedParagraphs || []).includes(i));
+    if (englishParagraphs.length === paragraphNodes.length) {
+      paragraphNodes.forEach((el, i) => { el.innerHTML = useEnglish ? englishParagraphs[i] : original.paragraphs[i]; });
+    }
     root.querySelectorAll('h2').forEach((el, i) => { el.innerHTML = useEnglish ? data.headings[i] : original.headings[i]; });
     root.querySelectorAll('li').forEach((el, i) => { el.innerHTML = useEnglish ? data.listItems[i] : original.listItems[i]; });
     root.querySelectorAll('.legal-page__footer p').forEach((el, i) => { el.innerHTML = useEnglish ? data.footer[i] : original.footer[i]; });

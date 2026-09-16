@@ -1210,6 +1210,7 @@ body.at-page-end .sticky-cta-mobile { transform: translateY(100%); }
   .quick-help { right: 16px; bottom: 16px; }
   body.at-page-end.has-sticky-cta .quick-help { bottom: 16px; }
   body.at-page-end.has-sticky-cta .back-to-top { bottom: 76px; }
+  body.at-page-end .footer__warning { padding-right: 72px; }
 }
 
 /* ===== INSPIRASI: COMING SOON BADGE ===== */
@@ -1304,6 +1305,11 @@ body.at-page-end .sticky-cta-mobile { transform: translateY(100%); }
   text-align: center;
   font-size: 0.78rem;
   color: var(--text-muted);
+}
+/* The wide navigation becomes a fixed 280px sidebar at this breakpoint.
+   Legal pages sit outside #main-site, so they need the same content offset. */
+@media (min-width: 1024px) {
+  .legal-page { margin-left: 280px; }
 }
 
 /* ===== FOCUS STATES (a11y) ===== */

@@ -107,6 +107,8 @@ window.addEventListener('st:main-language-change', () => {
     splashFields.title.textContent = splashText(data, 'title');
     splashFields.description.textContent = splashText(data, 'description');
     splashLink.textContent = splashText(data, 'cta') || splashLink.textContent;
+    splashDismiss.textContent = document.documentElement.lang === 'en' ? 'Continue to Website' : 'Lanjut ke Website';
+    splashClose.setAttribute('aria-label', document.documentElement.lang === 'en' ? 'Close announcement' : 'Tutup informasi event');
   }).catch(() => {});
 });
 
@@ -131,14 +133,20 @@ if (ageStore.get()) {
   ageNo.addEventListener('click', () => {
     // Lebih lembut: tampilkan pesan terima kasih, jangan langsung redirect
     const goodbye = document.querySelector('.age-gate__content');
+    const isEnglish = document.documentElement.lang === 'en';
     goodbye.setAttribute('role', 'status');
     goodbye.setAttribute('tabindex', '-1');
-    goodbye.innerHTML =
-      '<p class="age-gate__tagline">Terima Kasih</p>' +
-      '<h2 class="age-gate__title">Sampai Jumpa Lagi</h2>' +
-      '<p class="age-gate__desc">Situs ini hanya untuk pengunjung dewasa berusia 21 tahun ke atas. ' +
-      'Terima kasih atas kunjungan Anda.</p>' +
-      '<p class="age-gate__warning">Merokok membunuh. Dilarang menjual dan memberi kepada orang di bawah usia 21 tahun dan perempuan hamil.</p>';
+    goodbye.innerHTML = isEnglish
+      ? '<p class="age-gate__tagline">Thank You</p>' +
+        '<h2 class="age-gate__title">See You Again</h2>' +
+        '<p class="age-gate__desc">This website is intended only for adult visitors aged 21 and over. ' +
+        'Thank you for visiting.</p>' +
+        '<p class="age-gate__warning">Smoking kills. Do not sell or give to anyone under 21 or to pregnant women.</p>'
+      : '<p class="age-gate__tagline">Terima Kasih</p>' +
+        '<h2 class="age-gate__title">Sampai Jumpa Lagi</h2>' +
+        '<p class="age-gate__desc">Situs ini hanya untuk pengunjung dewasa berusia 21 tahun ke atas. ' +
+        'Terima kasih atas kunjungan Anda.</p>' +
+        '<p class="age-gate__warning">Merokok membunuh. Dilarang menjual dan memberi kepada orang di bawah usia 21 tahun dan perempuan hamil.</p>';
     goodbye.focus();
   });
   // Auto-focus tombol "Ya" untuk keyboard nav
@@ -385,7 +393,10 @@ function updateScrollUI() {
     backTop.classList.add('is-visible');
     if (backTop.classList.toggle('is-up', nearEnd) !== wasAtEnd) {
       wasAtEnd = nearEnd;
-      backTop.setAttribute('aria-label', nearEnd ? 'Kembali ke atas' : 'Lanjut ke bawah');
+      const isEnglish = document.documentElement.lang === 'en';
+      backTop.setAttribute('aria-label', nearEnd
+        ? (isEnglish ? 'Back to top' : 'Kembali ke atas')
+        : (isEnglish ? 'Scroll down' : 'Lanjut ke bawah'));
     }
   }
 

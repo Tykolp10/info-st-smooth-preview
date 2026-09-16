@@ -122,6 +122,13 @@
   lists['.footer__group-list a'] = { en: ['Home','About Us','Products','Inspiration','ST Story','Contact','Matur Suwon','Getszemani','Blokosutho','RNP & RNM','Merah Putih','Privacy Policy','Terms & Conditions'] };
   lists['.footer__copy'] = { en: '© 2026 PT Sehat Tentrem Jaya Lestari. All Rights Reserved.' };
   lists['.footer__warning'] = { en: '<span class="footer__warning-mark" aria-hidden="true">!</span> SMOKING KILLS. DO NOT SELL OR GIVE TO ANYONE UNDER 21 OR TO PREGNANT WOMEN.' };
+  const ariaCopy = {
+    '#age-gate': { id: 'Verifikasi usia 21 tahun ke atas', en: 'Age verification for visitors aged 21 and over' },
+    '.navbar__logo': { id: 'Kembali ke beranda', en: 'Back to home' },
+    '#products-filter': { id: 'Filter kategori produk', en: 'Filter products by category' },
+    '.hero__dot': { id: ['Tampilkan slide 1', 'Tampilkan slide 2', 'Tampilkan slide 3'], en: ['Show slide 1', 'Show slide 2', 'Show slide 3'] },
+    '.amb-card': { id: ['Lihat Instagram Indra Q (@indraqadarsih)', 'Lihat Instagram Indro H (@indrobass)', 'Lihat Instagram Pay (@payburman)'], en: ['View Indra Q on Instagram (@indraqadarsih)', 'View Indro H on Instagram (@indrobass)', 'View Pay on Instagram (@payburman)'] }
+  };
   lists['.product-card__desc'] = { en: [
     'Matur Suwon SM is Sehat Tentrem’s most accessible variant, with a rich yet smooth taste. In Javanese, Matur Suwon means “Thank You” — an expression of gratitude to the people of Indonesia.',
     'Raos Ngeten Puron is blended with tobacco and a range of spices. Its boldest profile among ST variants suits those who enjoy a stronger taste. The name expresses the idea of accepting things as they are.',
@@ -155,6 +162,12 @@
         if (!originalHTML.has(el)) originalHTML.set(el, el.innerHTML);
         const value = lang === 'id' ? originalHTML.get(el) : (Array.isArray(values[lang]) ? values[lang][i] : values[lang]);
         if (value) el.innerHTML = value;
+      });
+    });
+    Object.entries(ariaCopy).forEach(([selector, values]) => {
+      document.querySelectorAll(selector).forEach((el, i) => {
+        const value = lang === 'id' ? (Array.isArray(values.id) ? values.id[i] : values.id) : (Array.isArray(values.en) ? values.en[i] : values.en);
+        if (value) el.setAttribute('aria-label', value);
       });
     });
     const placeholders = { '#nama': ['Nama Anda', 'Your name'], '#email': ['email@anda.com', 'email@example.com'], '#pesan': ['Tulis pesan Anda di sini...', 'Write your message here...'] };
