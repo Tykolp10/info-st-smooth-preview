@@ -47,6 +47,8 @@ const ST_I18N = {
     'nav.menu': 'Menu',
     'nav.skip': 'Langsung ke isi',
     'nav.home': 'Halaman utama',
+    'nav.homeLabel': 'Sehat Tentrem, halaman utama',
+    'nav.navLabel': 'Navigasi utama',
     'nav.back': '← Kembali ke halaman utama',
     'preview.note': 'Pratinjau untuk peninjauan · Informasi perusahaan',
 
@@ -181,6 +183,8 @@ const ST_I18N = {
     'nav.menu': 'Menu',
     'nav.skip': 'Skip to content',
     'nav.home': 'Home',
+    'nav.homeLabel': 'Sehat Tentrem, home',
+    'nav.navLabel': 'Main navigation',
     'nav.back': '← Back to the main page',
     'preview.note': 'Preview for review · Company information',
 

@@ -911,6 +911,15 @@ a { text-decoration: none; color: inherit; }
   .timeline__item, .timeline__item:nth-child(even) { padding-left: 60px; padding-right: 0; justify-content: flex-start; }
   .timeline__dot { left: 20px; }
 }
+@media (max-width: 1199px) {
+  .footer__group { border-top: 1px solid var(--border); padding-top: 4px; }
+  .footer__group > summary { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; color: var(--text-muted); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.25em; cursor: pointer; }
+  .footer__group > summary::after { content: '+'; color: var(--gold); font-size: 1.15rem; font-weight: 300; letter-spacing: 0; }
+  .footer__group[open] > summary::after { content: '−'; }
+  .footer__group-list { gap: 10px; margin-top: 0; padding: 0 0 14px; }
+  .footer__group-list a { font-size: 0.8rem; }
+}
+
 @media (max-width: 640px) {
   .section { padding: 64px 0; }
   .navbar__nav { width: 86vw; padding: 80px 24px 32px; }
@@ -922,12 +931,6 @@ a { text-decoration: none; color: inherit; }
   .footer__logo-img { margin-inline: auto; }
   .footer__actions { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .footer__action { width: 100%; padding-inline: 10px; }
-  .footer__group { border-top: 1px solid var(--border); padding-top: 4px; }
-  .footer__group > summary { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; color: var(--text-muted); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; }
-  .footer__group > summary::after { content: '+'; color: var(--gold); font-size: 1.15rem; font-weight: 300; letter-spacing: 0; }
-  .footer__group[open] > summary::after { content: '−'; }
-  .footer__group-list { gap: 10px; margin-top: 0; padding: 0 0 14px; }
-  .footer__group-list a { font-size: 0.8rem; }
   .footer__bottom { padding-bottom: calc(16px + env(safe-area-inset-bottom)); }
   .about__stats { flex-direction: column; gap: 20px; }
   .age-gate__actions { flex-direction: column; }
@@ -939,9 +942,8 @@ a { text-decoration: none; color: inherit; }
   .hero__slide-caption { right: 24px; left: 24px; bottom: 32px; font-size: 0.55rem; text-align: right; white-space: normal; word-wrap: break-word; }
 }
 
-@media (min-width: 641px) {
-  /* Di layar lebar grup footer selalu terbuka (diatur lewat atribut open di
-     updateDeviceClasses), jadi summary bukan lagi tombol. */
+@media (min-width: 1200px) {
+  /* Desktop lebar menampilkan kelompok footer secara permanen. */
   .footer__group > summary { pointer-events: none; }
 }
 
@@ -1150,7 +1152,7 @@ body.at-page-end .quick-help { opacity: 1; visibility: visible; transform: none;
    "Cari Outlet" sendiri, jadi menahannya hanya menambah tumpukan. */
 body.at-page-end .sticky-cta-mobile { transform: translateY(100%); }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .quick-help { right: 16px; bottom: 16px; }
   body.at-page-end.has-sticky-cta .quick-help { bottom: 16px; }
   body.at-page-end.has-sticky-cta .back-to-top { bottom: 76px; }

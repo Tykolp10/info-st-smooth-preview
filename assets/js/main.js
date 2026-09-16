@@ -15,11 +15,10 @@ function updateDeviceClasses() {
     body.classList.add('is-desktop');
   }
 
-  // Di atas 640px grup footer bukan accordion lagi. Atribut open yang mengurusnya:
-  // memaksa anaknya tampil lewat CSS membuat isinya meluber ke luar <details> yang
-  // masih tertutup dan menghalangi klik di bawahnya. Hanya dijalankan saat melewati
-  // ambang, supaya grup yang sengaja dibuka pembaca di ponsel tidak ikut ditutup.
-  const wide = width > 640;
+  // Footer tetap berupa accordion di ponsel dan tablet. Hanya desktop lebar yang
+  // menampilkan tiga kelompok secara permanen. Ini menjaga judul Navigasi, Produk,
+  // dan Legal tetap bisa disentuh pada seluruh ukuran iPad.
+  const wide = width >= 1200;
   if (wide !== footerWasWide) {
     footerWasWide = wide;
     document.querySelectorAll('.footer__group').forEach(group => { group.open = wide; });
