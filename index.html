@@ -68,6 +68,24 @@
     </div>
   </div>
 
+  <!-- SPLASH EVENT: hanya dibuka setelah age gate disetujui -->
+  <div id="splash-screen" class="splash-screen hidden" role="dialog" aria-modal="true" aria-labelledby="splash-title">
+    <div class="splash-screen__backdrop"></div>
+    <div class="splash-screen__card">
+      <button id="splash-close" class="splash-screen__close" type="button" aria-label="Tutup informasi event">×</button>
+      <img id="splash-image" class="splash-screen__image" src="assets/images/optimized/event-jazz-bandung.jpg" alt="" loading="eager" />
+      <div class="splash-screen__body">
+        <p id="splash-eyebrow" class="splash-screen__eyebrow">Event Terbaru</p>
+        <h2 id="splash-title" class="splash-screen__title">Informasi Terbaru Sehat Tentrem</h2>
+        <p id="splash-description" class="splash-screen__description">Lihat kegiatan terbaru Sehat Tentrem.</p>
+        <div class="splash-screen__actions">
+          <a id="splash-link" class="btn btn--gold" href="#" target="_blank" rel="noopener">Lihat Selengkapnya</a>
+          <button id="splash-dismiss" class="btn btn--outline" type="button">Lanjut ke Website</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- MAIN SITE (hidden until age verified) -->
   <div id="main-site" class="main-site hidden">
 

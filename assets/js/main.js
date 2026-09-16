@@ -36,12 +36,77 @@ const ageGate = document.getElementById('age-gate');
 const mainSite = document.getElementById('main-site');
 const ageYes = document.getElementById('age-yes');
 const ageNo = document.getElementById('age-no');
+const splashScreen = document.getElementById('splash-screen');
+const splashClose = document.getElementById('splash-close');
+const splashDismiss = document.getElementById('splash-dismiss');
+const splashLink = document.getElementById('splash-link');
+const splashImage = document.getElementById('splash-image');
+const splashFields = {
+  eyebrow: document.getElementById('splash-eyebrow'),
+  title: document.getElementById('splash-title'),
+  description: document.getElementById('splash-description')
+};
 
 function playEpicHeroEntrance() {
   if (!mainSite) return;
   // CSS owns the small entrance animation; no animation engine is needed here.
   requestAnimationFrame(() => mainSite.classList.add('site-ready'));
 }
+
+const splashStore = {
+  get() { try { return sessionStorage.getItem('st-splash-dismissed') === '1'; } catch (e) { return false; } },
+  set() { try { sessionStorage.setItem('st-splash-dismissed', '1'); } catch (e) {} }
+};
+const splashText = (data, key) => {
+  const lang = document.documentElement.lang === 'en' ? 'en' : 'id';
+  return data[`${key}_${lang}`] || data[`${key}_id`] || data[key] || '';
+};
+function revealMainSite() {
+  if (!mainSite) return;
+  mainSite.classList.remove('hidden');
+  mainSite.style.opacity = '0';
+  setTimeout(() => {
+    mainSite.style.transition = 'opacity 0.6s';
+    mainSite.style.opacity = '1';
+    playEpicHeroEntrance();
+    updateScrollUI();
+  }, 50);
+}
+function closeSplash() {
+  splashStore.set();
+  if (splashScreen) splashScreen.classList.add('hidden');
+  revealMainSite();
+}
+function showSplash() {
+  if (!splashScreen || splashStore.get()) return revealMainSite();
+  fetch('splash.json', { cache: 'no-store' })
+    .then(response => { if (!response.ok) throw new Error('Splash config unavailable'); return response.json(); })
+    .then(data => {
+      if (data.enabled === false) return revealMainSite();
+      splashFields.eyebrow.textContent = splashText(data, 'eyebrow');
+      splashFields.title.textContent = splashText(data, 'title');
+      splashFields.description.textContent = splashText(data, 'description');
+      splashImage.src = data.image || splashImage.src;
+      splashImage.alt = splashText(data, 'title');
+      splashLink.href = safeHttpUrl(data.link || '#');
+      splashLink.textContent = splashText(data, 'cta') || (document.documentElement.lang === 'en' ? 'Learn More' : 'Lihat Selengkapnya');
+      splashScreen.classList.remove('hidden');
+      splashDismiss && splashDismiss.focus();
+    })
+    .catch(() => revealMainSite());
+}
+if (splashClose) splashClose.addEventListener('click', closeSplash);
+if (splashDismiss) splashDismiss.addEventListener('click', closeSplash);
+if (splashScreen) splashScreen.addEventListener('click', event => { if (event.target === splashScreen.querySelector('.splash-screen__backdrop')) closeSplash(); });
+window.addEventListener('st:main-language-change', () => {
+  if (!splashScreen || splashScreen.classList.contains('hidden')) return;
+  fetch('splash.json', { cache: 'no-store' }).then(r => r.json()).then(data => {
+    splashFields.eyebrow.textContent = splashText(data, 'eyebrow');
+    splashFields.title.textContent = splashText(data, 'title');
+    splashFields.description.textContent = splashText(data, 'description');
+    splashLink.textContent = splashText(data, 'cta') || splashLink.textContent;
+  }).catch(() => {});
+});
 
 // sessionStorage THROWS (not returns null) when storage is blocked — Safari private
 // mode, embedded webviews, cookies-off. At top level that would kill every script below.
@@ -52,12 +117,7 @@ const ageStore = {
 
 if (ageStore.get()) {
   ageGate.style.display = 'none';
-  mainSite.classList.remove('hidden');
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', playEpicHeroEntrance);
-  } else {
-    playEpicHeroEntrance();
-  }
+  showSplash();
 } else {
   ageYes.addEventListener('click', () => {
     ageStore.set();
@@ -65,16 +125,7 @@ if (ageStore.get()) {
     ageGate.style.pointerEvents = 'none';
     ageGate.style.transition = 'opacity 0.8s ease';
     setTimeout(() => { ageGate.style.display = 'none'; }, 800);
-    mainSite.classList.remove('hidden');
-    mainSite.style.opacity = '0';
-    setTimeout(() => { 
-      mainSite.style.transition = 'opacity 0.6s'; 
-      mainSite.style.opacity = '1'; 
-      playEpicHeroEntrance();
-      // Tinggi dokumen baru terukur setelah konten tampil; hitung ulang agar bantuan
-      // cepat tidak terlanjur muncul di puncak halaman.
-      updateScrollUI();
-    }, 50);
+    showSplash();
   });
   ageNo.addEventListener('click', () => {
     // Lebih lembut: tampilkan pesan terima kasih, jangan langsung redirect
