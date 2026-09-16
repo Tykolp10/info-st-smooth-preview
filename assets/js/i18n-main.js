@@ -135,6 +135,7 @@
     'The name Syifaa comes from the Arabic word for “healing”. It is an ultra-premium ST variant made with selected tobacco, an intense spice blend, and high-quality pure honey.'
   ] };
   lists['.product-card__tag'] = { en: ['SKT · Bold','SKT · Bold','SKT · Balanced','SKT · Balanced','SKT · Electron','SKT · Slim','SKT · Premium','White SKT · Caffeine','SKT · Oxytron','SKT · Ultra Premium'] };
+  lists['#sticky-btn'] = { en: 'Find Your Nearest Outlet <span aria-hidden="true">→</span>' };
   const originalHTML = new WeakMap();
   function safeGet() { try { return localStorage.getItem('st-main-lang') || 'id'; } catch (_) { return 'id'; } }
   function safeSet(v) { try { localStorage.setItem('st-main-lang', v); } catch (_) {} }
@@ -159,6 +160,8 @@
     const placeholders = { '#nama': ['Nama Anda', 'Your name'], '#email': ['email@anda.com', 'email@example.com'], '#pesan': ['Tulis pesan Anda di sini...', 'Write your message here...'] };
     Object.entries(placeholders).forEach(([selector, values]) => document.querySelectorAll(selector).forEach(el => { el.placeholder = values[lang === 'en' ? 1 : 0]; }));
     document.querySelectorAll('[data-main-lang-toggle]').forEach(btn => { btn.textContent = lang === 'id' ? 'ID / EN' : 'EN / ID'; btn.setAttribute('aria-label', lang === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'); });
+    const stickyCta = document.querySelector('#sticky-cta-mobile');
+    if (stickyCta) stickyCta.setAttribute('aria-label', lang === 'en' ? 'Quick mobile action' : 'Aksi cepat mobile');
     safeSet(lang);
     window.dispatchEvent(new CustomEvent('st:main-language-change', { detail: { lang } }));
   }
