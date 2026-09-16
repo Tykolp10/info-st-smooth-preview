@@ -523,6 +523,7 @@ function loadDynamicEvents() {
       `).join('');
 
       inspirasiGrid.innerHTML = html;
+      if (typeof window.applyMainLanguage === 'function') window.applyMainLanguage(document.documentElement.lang);
 
       // Re-observe for scroll reveal animations
       if (typeof revealObserver !== 'undefined') {

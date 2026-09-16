@@ -100,6 +100,41 @@
     '.insp-card__text': { en: ['An intimate Jazz Night with ST ambassador Indro Hardjodikoro at Ruang Putih Bandung.','Sharing inspiration, stories, and the warmth of Ramadan with Sehat Tentrem in Mojokerto.','ST joined the thanksgiving gathering for Isra Mi’raj of Prophet Muhammad SAW and Shiddiqiyyah Day 1447 H.'] },
     '.faq__answer p': { en: ['Not yet. We currently do not distribute through national convenience stores. We focus on empowering our agents and distribution partners across 34 provinces in Indonesia.','Yes. Many official agents deliver across the archipelago. Find the nearest agent through our Locator or contact the official WhatsApp number for assistance.','Use the contact form above, select “Become an agent / distribution partner,” and our team will contact you on WhatsApp with the requirements.'] }
   };
+  lists['.hero__slide-caption'] = { en: ['From Jombang — For a Greater Indonesia','The Spirit of the Archipelago','ST Brand Ambassador · For a Greater Indonesia'] };
+  lists['.marquee-track > span:not(.sep)'] = { en: ['Sehat Tentrem','For a Greater Indonesia','Premium Hand-Rolled Kretek','Since 2013','Jombang · East Java','Sehat Tentrem','For a Greater Indonesia','Premium Hand-Rolled Kretek','Since 2013','Jombang · East Java'] };
+  lists['.social-validation .section-eyebrow'] = { en: 'Closer Than You Think' };
+  lists['.social-validation .container > div > div > span:last-child'] = { en: ['Provinces','Registered Outlets','The Archipelago'] };
+  lists['.about__stats .stat-label'] = { en: ['Product Variants','Employees','Partners / Branches'] };
+  lists['.philosophy__quote'] = { en: '<span class="philosophy__open-q">"</span>Heritage kretek meets today’s technology —<br/><em>for the pride and prosperity of Indonesia.</em><span class="philosophy__close-q">"</span>' };
+  lists['#products .section-note'] = { en: 'Prices vary by region · <a href="https://info-st.com/location" target="_blank" rel="noopener">Find a store near you →</a>' };
+  lists['#ambassador .section-desc'] = { en: 'People who represent the spirit of “For a Greater Indonesia” — authentic souls inspiring millions across Indonesia.' };
+  lists['#csr .section-desc'] = { en: '“For a Greater Indonesia” is more than a slogan — it takes shape in actions that touch people’s lives every day.' };
+  lists['.insp-card__cat'] = { en: ['Music & Culture','Ramadan Event','Religion & Culture'] };
+  lists['.csr-card__tag'] = { en: ['Social Infrastructure','Humanity & Care','Community Economy'] };
+  lists['#products .section-note a'] = { en: 'Find a store near you →' };
+  lists['#kategori option'] = { en: ['Choose a category...','Product Stock','Become an Agent / Partner','Partnership / Collaboration','Media Question','Other'] };
+  lists['#nama'] = { en: 'Your name' };
+  lists['#pesan'] = { en: 'Write your message here...' };
+  lists['#email'] = { en: 'email@example.com' };
+  lists['.kontak__list li:nth-child(1) span:last-child'] = { en: 'Jln Soekarno Hatta No. 22, Nglungge, Peterongan, Jombang — East Java, Indonesia' };
+  lists['.kontak__list li:nth-child(4) span:last-child'] = { en: 'Monday–Friday, 08:00–17:00 WIB' };
+  lists['.form-optional'] = { en: '(optional)' };
+  lists['.footer__group-list a'] = { en: ['Home','About Us','Products','Inspiration','ST Story','Contact','Products','Matur Suwon','Getszemani','Blokosutho','RNP & RNM','Merah Putih','Privacy Policy','Terms & Conditions'] };
+  lists['.footer__copy'] = { en: '© 2026 PT Sehat Tentrem Jaya Lestari. All Rights Reserved.' };
+  lists['.footer__warning'] = { en: '<span class="footer__warning-mark" aria-hidden="true">!</span> SMOKING KILLS. DO NOT SELL OR GIVE TO ANYONE UNDER 21 OR TO PREGNANT WOMEN.' };
+  lists['.product-card__desc'] = { en: [
+    'Matur Suwon SM is Sehat Tentrem’s most accessible variant, with a rich yet smooth taste. In Javanese, Matur Suwon means “Thank You” — an expression of gratitude to the people of Indonesia.',
+    'Raos Ngeten Puron is blended with tobacco and a range of spices. Its boldest profile among ST variants suits those who enjoy a stronger taste. The name expresses the idea of accepting things as they are.',
+    'Raos Ngeten Mawon balances strength and smoothness. Its medium-grade tobacco is blended with spices inspired by ST’s premium variants, offering a premium character at a more accessible price.',
+    'Merah Putih was first released to celebrate Indonesia’s independence and the founding of the Republic in August. It later became a permanent ST kretek variant with a smooth, savory profile and a refreshed pack.',
+    'In Javanese, Blokosutho means “straightforward” or “as it is”. Alastu Blokosutho uses high-quality tobacco and a distinctive spice blend for a characterful taste.',
+    'Getszemani is Sehat Tentrem’s slim kretek. It keeps a distinctive kretek character while staying smooth and light, bringing together the experience of kretek and a slim format.',
+    'In Javanese, Raos Paling Eco means “the best taste”. It blends quality tobacco and cloves with Indonesian spices and pure honey, creating a fragrant, smooth, and savory profile.',
+    'Alastu Caffetin is a white kretek that challenges the assumption that white cigarettes must be filtered. Its name combines “caffeine” and “nicotine”, with a light yet savory spice profile.',
+    'Raos Paling Eco Spesial Oxy offers a distinctive taste experience with Oxytron technology. High-quality tobacco and cloves meet Indonesian spices for a sharper, lively profile with a smooth draw.',
+    'The name Syifaa comes from the Arabic word for “healing”. It is an ultra-premium ST variant made with selected tobacco, an intense spice blend, and high-quality pure honey.'
+  ] };
+  lists['.product-card__tag'] = { en: ['SKT · Bold','SKT · Bold','SKT · Balanced','SKT · Balanced','SKT · Electron','SKT · Slim','SKT · Premium','White SKT · Caffeine','SKT · Oxytron','SKT · Ultra Premium'] };
   const originalHTML = new WeakMap();
   function safeGet() { try { return localStorage.getItem('st-main-lang') || 'id'; } catch (_) { return 'id'; } }
   function safeSet(v) { try { localStorage.setItem('st-main-lang', v); } catch (_) {} }
@@ -121,12 +156,16 @@
         if (value) el.innerHTML = value;
       });
     });
+    const placeholders = { '#nama': ['Nama Anda', 'Your name'], '#email': ['email@anda.com', 'email@example.com'], '#pesan': ['Tulis pesan Anda di sini...', 'Write your message here...'] };
+    Object.entries(placeholders).forEach(([selector, values]) => document.querySelectorAll(selector).forEach(el => { el.placeholder = values[lang === 'en' ? 1 : 0]; }));
     document.querySelectorAll('[data-main-lang-toggle]').forEach(btn => { btn.textContent = lang === 'id' ? 'ID / EN' : 'EN / ID'; btn.setAttribute('aria-label', lang === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'); });
     safeSet(lang);
+    window.dispatchEvent(new CustomEvent('st:main-language-change', { detail: { lang } }));
   }
   function init() {
     setLanguage(safeGet());
     document.querySelectorAll('[data-main-lang-toggle]').forEach(btn => btn.addEventListener('click', () => setLanguage(document.documentElement.lang === 'id' ? 'en' : 'id')));
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+  window.applyMainLanguage = setLanguage;
 })();
