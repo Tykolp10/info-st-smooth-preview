@@ -1123,8 +1123,8 @@ a { text-decoration: none; color: inherit; }
 
 /* "Untuk Indonesia Raya" turun ke barisnya sendiri di layar kecil; di layar lebar
    tetap satu baris dengan pemisah titik. */
-.hero__eyebrow-tag { display: inline-block; margin-inline-start: 0.5em; white-space: nowrap; }
-.hero__eyebrow-tag::before { content: '\00b7'; margin-inline: 0 0.5em; }
+.hero__eyebrow-tag { display: block; margin-top: 0.45em; white-space: nowrap; }
+.hero__eyebrow-tag::before { content: none; }
 
 .back-to-top {
   position: fixed;
@@ -1425,10 +1425,10 @@ select#kategori option {
 
 /* ===== MOBILE TIMELINE ===== */
 @media (max-width: 640px) {
-  /* Keep the English and Indonesian hero eyebrow on one stable line on phones. */
-  .hero__eyebrow { font-size: 0.55rem; letter-spacing: 0.06em; white-space: nowrap; }
-  .hero__eyebrow-tag { display: inline; margin-inline-start: 0.25em; white-space: nowrap; }
-  .hero__eyebrow-tag::before { content: '\00b7'; margin-inline: 0 0.25em; }
+  /* Keep the two-line eyebrow layout identical in Indonesian and English. */
+  .hero__eyebrow { font-size: 0.55rem; letter-spacing: 0.06em; white-space: normal; }
+  .hero__eyebrow-tag { display: block; margin-inline-start: 0; margin-top: 0.45em; white-space: nowrap; }
+  .hero__eyebrow-tag::before { content: none; }
   .timeline::before { display: none; }
   .timeline__item { padding: 0 !important; flex-direction: column; }
   .timeline__dot { display: none; }
